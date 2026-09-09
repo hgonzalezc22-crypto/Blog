@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Blog</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <p>Henry Gonzalez 5090-23-19365</p>
+    <h1>Mi Blog</h1>
+
+    <div id = "Crear_articulo">
+        <h3>Crear nuevo articulo</h3>
+        <div>  
+            <label for="titulo">Titulo:</label>
+            <input type="text" id="titulo" name="titulo" required>
+        </div>
+        <div>
+            <label for="cuerpo">Cuerpo:</label>
+            <br>
+            <textarea id="cuerpo" name="cuerpo" rows="6" cols="40" style="resize: none;" required></textarea>
+        </div>
+        <div>  
+            <label for="fecha">Fecha:</label>
+            <input type="text" id="fecha" name="fecha" required>
+        </div>
+        <button type="submit">Enviar</button>
+    </div>
+    
+    <div id="blogs"></div> 
+
+    <script src="index_script.js"></script> 
+    
+</body>
+</html>

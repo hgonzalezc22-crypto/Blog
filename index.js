@@ -2,6 +2,7 @@
 const { conexion } = require("./basededatos/conexion");
 const express = require("express");
 const cors = require("cors");
+const path = require("path"); //para usar dirname y poder servir el front-end
 
 // 2. Mensaje inicial de arranque
 console.log("Iniciando API Node.js...");
@@ -23,10 +24,19 @@ app.use(express.urlencoded({ extended: true })); // Soporta datos enviados en fo
 // 7. Cargar las rutas de la API
 const rutas_articulo = require("./rutas/articulo");
 
+//ruta para cargar blog
+const blogRoutes = require("./rutas/articulo");
+
 // Registrar las rutas bajo el prefijo '/api'
 app.use("/api", rutas_articulo);
+
+//ruta para cargar blog
+app.use("/api/blog", blogRoutes);
 
 // 8. Servidor HTTP a la escucha de peticiones
 app.listen(puerto, () => {
     console.log(`Servidor corriendo en el puerto http://localhost:${puerto}`);
 });
+
+// Servir frontend
+app.use(express.static(path.join(__dirname, "public")));

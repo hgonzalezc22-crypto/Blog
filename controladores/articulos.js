@@ -37,7 +37,22 @@ const crear = async (req, res) => {
     }
 };
 
+//controlador para obtener los articulos
+const obtenerBlogs = async (req, res) => {
+    try {
+        const blogs = await Articulo.find().sort({ fecha: -1 });
+
+        res.json(blogs);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            mensaje: "Error al obtener los blogs"
+        });
+    }
+};
+
 // Exportamos los controladores disponibles
 module.exports = {
-    crear
+    crear,
+    obtenerBlogs
 };
