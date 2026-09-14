@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar</title>
+    <link rel="stylesheet" href="crud.css">
+</head>
+<body>
+    <div id="Crear_articulo" class="contenedor">
+        <h3>Crear nuevo articulo</h3>
+        <form id="formAgregar">
+            <div>  
+                <label for="titulo">Titulo:</label><br>
+                <input type="text" id="titulo" name="titulo" required>
+            </div>
+            <div>
+                <label for="cuerpo">Cuerpo:</label>
+                <br>
+                <textarea id="cuerpo" name="cuerpo" rows="6" cols="40" style="resize: none;" required></textarea>
+            </div>
+            <!-- Si no usas fecha en tu JSON de Mongo, puedes ignorar este campo en el JS -->
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+    <script src="agregar.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+body {
+    background-color: rgb(255, 233, 172);
+    font-family: sans-serif; /* Sin fuente especial, usa la estándar del navegador */
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor {
+    text-align: center;
+}
+
+form div {
+    margin-bottom: 15px;
+}

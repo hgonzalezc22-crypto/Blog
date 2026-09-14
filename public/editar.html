@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar</title>
+    <link rel="stylesheet" href="crud.css">
+</head>
+<body>
+    <div id="Editar_articulo" class="contenedor">
+        <h3>Editar articulo</h3>
+        <form id="formEditar">
+            <div>  
+                <label for="id">ID del articulo a editar:</label><br>
+                <input type="text" id="id" name="id" required>
+            </div>
+            <div>  
+                <label for="titulo">Nuevo Titulo (Opcional):</label><br>
+                <input type="text" id="titulo" name="titulo">
+            </div>
+            <div>
+                <label for="cuerpo">Nuevo Cuerpo (Opcional):</label>
+                <br>
+                <textarea id="cuerpo" name="cuerpo" rows="6" cols="40" style="resize: none;"></textarea>
+            </div>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+    <script src="editar.js"></script>
+</body>
+</html>
