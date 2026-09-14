@@ -13,6 +13,17 @@ async function cargarBlogs() {
                     idArticulo.style.display = "block";
                     idArticulo.style.color = "#555";
                     idArticulo.textContent = "ID: " + (blog._id || blog.id);
+                    articulo.appendChild(idArticulo); //lo agrega de una vez para que esté antes de la img
+
+                    // Si existe URL de imagen, renderizamos la etiqueta <img>
+                    if (blog.imgUrl) {
+                        const img = document.createElement("img");
+                        img.src = blog.imgUrl;
+                        img.alt = blog.titulo;
+                        img.style.maxWidth = "400px"; // Ajuste visual básico
+                        img.style.maxHeight = "300px"; // Ajuste visual básico
+                        articulo.appendChild(img); 
+                    }
 
                     const titulo = document.createElement("h2");
                     titulo.textContent = blog.titulo;
@@ -36,7 +47,6 @@ async function cargarBlogs() {
                     //fecha.textContent = "Creado en: "+ new Date(blog.fecha).toLocaleDateString();
                     fecha.textContent = "Creado en "+ fechaFormateada;
 
-                    articulo.appendChild(idArticulo);
                     articulo.appendChild(titulo);
                     articulo.appendChild(contenido);
                     articulo.appendChild(fecha);

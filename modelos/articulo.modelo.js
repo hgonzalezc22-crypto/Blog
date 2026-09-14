@@ -14,12 +14,10 @@ const ArticuloSchema = Schema({
         type: Date,
         default: Date.now
     },
-    /*
     imgUrl: {
         type: String,
-        default: "default.png"
+        required: false
     },
-    */
 })
 
 // Exportamos el modelo vinculándolo a la colección 'articles'

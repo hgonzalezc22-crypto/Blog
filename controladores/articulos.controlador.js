@@ -4,12 +4,13 @@ const Articulo = require("../modelos/articulo.modelo");
 // Controlador para crear un nuevo artículo
 const crear = async (req, res) => {
     try {
-        const { titulo, contenido} = req.body;
+        const { titulo, contenido, imgUrl} = req.body;
 
         // 2. Instanciar el objeto del artículo con la fecha autogenerada en el servidor
         const nuevoArticulo = new Articulo({
             titulo: titulo,
             contenido: contenido,
+            imgUrl: imgUrl,
             fecha: new Date() // Inyección de la fecha actual del sistema
         });
 
@@ -53,12 +54,13 @@ const editar = async (req, res) => {
         const { id } = req.params;
 
         // 2. Extraer los campos enviados en el body
-        const {titulo, contenido} = req.body;
+        const {titulo, contenido, imgUrl} = req.body;
 
         // 3. Armar objeto con los datos a actualizar
         const datosActualizar = {};
         if (titulo) datosActualizar.titulo = titulo;
         if (contenido) datosActualizar.contenido = contenido;
+        if (imgUrl) datosActualizar.imgUrl = imgUrl
 
         // 4. Actualizar el documento en la base de datos
         // { new: true } retorna el documento ya modificado en lugar del original

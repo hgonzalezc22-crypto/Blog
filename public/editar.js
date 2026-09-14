@@ -4,6 +4,7 @@ document.getElementById('formEditar').addEventListener('submit', async (e) => {
     const id = document.getElementById('id').value;
     const titulo = document.getElementById('titulo').value.trim();
     const cuerpo = document.getElementById('cuerpo').value.trim();
+    const imglink = document.getElementById('imgcampo').value;
 
     const payload = {};
 
@@ -13,6 +14,9 @@ document.getElementById('formEditar').addEventListener('submit', async (e) => {
     }
     if (cuerpo !== '') {
         payload.contenido = cuerpo;
+    }
+    if(imglink !== '') {
+        payload.imgUrl = imglink;
     }
 
     // Si el usuario presionó enviar sin llenar ningún campo opcional, volvemos sin hacer petición

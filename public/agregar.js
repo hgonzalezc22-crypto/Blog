@@ -3,11 +3,13 @@ document.getElementById('formAgregar').addEventListener('submit', async (e) => {
 
     const titulo = document.getElementById('titulo').value;
     const cuerpo = document.getElementById('cuerpo').value;
+    const imglink = document.getElementById('imgcampo').value;
     
     // JSON.stringify se encarga de escapar los saltos de línea y ponerlo en una sola línea con '\n'
     const payload = {
         titulo: titulo,
-        contenido: cuerpo 
+        contenido: cuerpo, 
+        imgUrl: imglink
     };
 
     try {
