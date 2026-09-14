@@ -1,7 +1,65 @@
-#blogs {
-    border: 2px solid black;
+body {
+    background-color: rgb(255, 233, 172);
+    margin: 0;
+    padding: 0;
 }
 
-#Crear_articulo{
-    margin-bottom: 20px;
+.banner-superior {
+    width: 100%;
+    line-height: 0; /* Elimina espacio extra debajo de la imagen */
+}
+
+.banner-superior img {
+    width: 100%;
+    height: auto; 
+    display: block;
+}
+
+#blogs article{
+    background-color: white;
+    border: 2px solid black;
+    margin: 10px;
+}
+
+
+#blogs article h2 { /* Elimina espacio antes del h2 */
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#blogs article p { /* Elimina espacio antes del h2 */
+    margin-top: 0;
+}
+
+main {
+  display: flex;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+}
+
+main h3 {
+    margin-left: 2%;
+}
+
+#seccion-izquierda {
+    width: 100%;
+}
+
+#seccion-derecha {
+    background-color: rgb(255, 159, 33);
+    display: flex;
+    flex-direction: column;  
+    gap: 25px;  
+    width: 15%;
+    align-items: center;
+    
+}
+
+#seccion-derecha .primer-boton {
+    margin-top: 20%;
+}
+
+footer {
+  text-align: center;
 }

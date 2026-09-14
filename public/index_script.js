@@ -1,6 +1,6 @@
 async function cargarBlogs() {
             try {
-                const respuesta = await fetch("/api/blog");
+                const respuesta = await fetch("/api/articulo-ver-todos");
                 const blogs = await respuesta.json();
 
                 const contenedor = document.getElementById("blogs");
@@ -11,14 +11,14 @@ async function cargarBlogs() {
                     const titulo = document.createElement("h2");
                     titulo.textContent = blog.titulo;
 
-                    const cuerpo = document.createElement("p");
-                    cuerpo.textContent = blog.cuerpo;
+                    const contenido = document.createElement("p");
+                    contenido.textContent = blog.contenido;
 
                     const fecha = document.createElement("small");
-                    fecha.textContent = new Date(blog.fecha).toLocaleDateString();
+                    fecha.textContent = "Creado en: "+ new Date(blog.fecha).toLocaleDateString();
 
                     articulo.appendChild(titulo);
-                    articulo.appendChild(cuerpo);
+                    articulo.appendChild(contenido);
                     articulo.appendChild(fecha);
 
                     contenedor.appendChild(articulo);

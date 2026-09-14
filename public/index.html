@@ -6,28 +6,26 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <p>Henry Gonzalez 5090-23-19365</p>
-    <h1>Mi Blog</h1>
+    <header class="banner-superior">
+    <img src="img/banner.png" alt="Bienvenido.">
+    </header>
 
-    <div id = "Crear_articulo">
-        <h3>Crear nuevo articulo</h3>
-        <div>  
-            <label for="titulo">Titulo:</label>
-            <input type="text" id="titulo" name="titulo" required>
+    <main>
+        <div id="seccion-izquierda">
+            <h3>Todos los articulos</h3>
+            <div id="blogs"></div> 
         </div>
-        <div>
-            <label for="cuerpo">Cuerpo:</label>
-            <br>
-            <textarea id="cuerpo" name="cuerpo" rows="6" cols="40" style="resize: none;" required></textarea>
+
+        <div id="seccion-derecha">
+            <button class="primer-boton">Agregar articulo</button>
+            <button class="mi-boton">Editar articulo</button>
+            <button class="mi-boton">Borrar articulo</button>
         </div>
-        <div>  
-            <label for="fecha">Fecha:</label>
-            <input type="text" id="fecha" name="fecha" required>
-        </div>
-        <button type="submit">Enviar</button>
-    </div>
-    
-    <div id="blogs"></div> 
+    </main>
+
+    <footer>
+        <p>Henry González 5090-23-19365</p>
+    </footer>
 
     <script src="index_script.js"></script> 
     
