@@ -25,6 +25,11 @@ app.use(express.urlencoded({ extended: true })); //Soporta datos enviados en for
 const rutas_articulo = require("./rutas/articulo.rutas");
 app.use("/api", rutas_articulo);
 
+//Servir la carpeta de subidas de forma estática para su uso en index_script.js
+//Esto es para que pueda acceder a la carpeta de uploads ya que por ser front end
+//por defecto no tiene permitido navegar o interactuar con index.js
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 //Servidor HTTP a la escucha de peticiones
 app.listen(puerto, () => {
     console.log(`Servidor corriendo en el puerto http://localhost:${puerto}`);

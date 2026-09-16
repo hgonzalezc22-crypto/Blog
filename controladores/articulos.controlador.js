@@ -147,63 +147,92 @@ const borrar = async (req, res) => {
     }
 };
 
-/*
+
+//PARA SUBIR IMAGENES-----------------------------------------------------------------------
+const multer = require('multer');
+const fs = require('fs');
+const path = require('path');
+
+// ==========================================
+// 1. Configuración de Multer (Se declara fuera de la función)
+// ==========================================
+// Configuración de Multer
+const almacenamiento = multer.diskStorage({
+    destination: (req, file, cb) => {
+        const rutaUploads = './uploads/';
+
+        // Si la carpeta no existe, Node.js la crea automáticamente
+        if (!fs.existsSync(rutaUploads)) {
+            fs.mkdirSync(rutaUploads, { recursive: true });
+        }
+
+        cb(null, rutaUploads);
+    },
+    filename: (req, file, cb) => {
+        cb(null, "articulo_" + Date.now() + path.extname(file.originalname));
+    }
+});
+
+// Inicializamos multer con la configuración anterior, esperando un campo llamado 'imagen' (form-data)
+const subidas = multer({ storage: almacenamiento });
+
+// ==========================================
+// 2. Controlador principal
+// ==========================================
 const subir = async (req, res) => {
     try {
-        // Configurar multer
-
-        // Recoger el fichero de imagen subido
-        if (!req.file && !req.files) {
+        if (!req.file) {
             return res.status(404).json({
                 status: "error",
-                mensaje: "Petición invalida"
+                mensaje: "Petición inválida, no se ha enviado ninguna imagen"
             });
         }
 
-        // Nombre del archivo
-        let archivo = req.file.originalname;
+        const extension = req.file.originalname.split(".").pop().toLowerCase();
 
-        // Extensión del archivo
-        let archivo_split = archivo.split(".");
-        let archivo_extension = archivo_split[1];
-
-        // Comprobar extensión correcta
-        if (archivo_extension !== "png" && archivo_extension !== "jpg" &&
-            archivo_extension !== "jpeg" && archivo_extension !== "gif") {
-            // Borrar archivo y dar respuesta
-            await new Promise((resolve, reject) => {
-                fs.unlink(req.file.path, (error) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        resolve();
-                    }
-                });
-            });
+        if (!["png", "jpg", "jpeg", "gif"].includes(extension)) {
+            await fs.promises.unlink(req.file.path);
             return res.status(400).json({
                 status: "error",
                 mensaje: "Imagen inválida"
             });
-        } else {
-            return res.status(200).json({
-                status: "success",
-                archivo_split,
-                files: req.file
+        }
+
+        const articuloId = req.params.id;
+        const articuloActualizado = await Articulo.findByIdAndUpdate(
+            articuloId,
+            { imgUrl: req.file.filename },
+            { new: true }
+        );
+
+        if (!articuloActualizado) {
+            await fs.promises.unlink(req.file.path);
+            return res.status(404).json({
+                status: "error",
+                mensaje: "El artículo no existe"
             });
         }
+
+        return res.status(200).json({
+            status: "success",
+            articulo: articuloActualizado
+        });
+
     } catch (error) {
         return res.status(500).json({
             status: "error",
-            mensaje: "Error en el servidor"
+            mensaje: "Error en el servidor",
+            error: error.message
         });
     }
 };
-*/
 
 // Exportamos los controladores disponibles
 module.exports = {
     crear,
     obtenerBlogs,
     editar,
-    borrar
+    borrar,
+    subir,
+    subidas
 };

@@ -19,8 +19,9 @@
                 <textarea id="cuerpo" name="cuerpo" rows="6" cols="40" style="resize: none;" required></textarea>
             </div>
             <div>  
-                <label for="imgcampo">Link img:</label><br>
-                <input type="text" id="imgcampo" name="imgcampo">
+                <label for="archivoImagen">Subir Imagen (Opcional):</label><br>
+                <!-- accept="image/*" limita la búsqueda a solo archivos de imagen -->
+                <input type="file" id="archivoImagen" accept="image/*">
             </div>
             <button type="submit">Enviar</button>
         </form>

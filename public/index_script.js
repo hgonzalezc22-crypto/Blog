@@ -1,6 +1,21 @@
+function mostrarPopup(mensaje) {
+    document.getElementById("mensaje-error").innerText = mensaje;
+    document.getElementById("popup-error").style.display = "block";
+}
+
+function cerrarPopup() {
+    document.getElementById("popup-error").style.display = "none";
+}
+
 async function cargarBlogs() {
             try {
                 const respuesta = await fetch("/api/articulo-ver-todos");
+
+                // Caso 1: El servidor está encendido, pero hubo un error interno (ej. la base de datos se cayó)
+                if (respuesta.status === 500) {
+                    mostrarPopup("Error 500: Problema interno del servidor.");
+                    return; 
+                }
                 const blogs = await respuesta.json();
 
                 const contenedor = document.getElementById("blogs");
@@ -18,11 +33,13 @@ async function cargarBlogs() {
                     // Si existe URL de imagen, renderizamos la etiqueta <img>
                     if (blog.imgUrl) {
                         const img = document.createElement("img");
-                        img.src = blog.imgUrl;
+                        // Concatenamos la ruta donde Express sirve las imágenes estáticas
+                        img.src = `/uploads/${blog.imgUrl}`;
+                        
                         img.alt = blog.titulo;
                         img.style.maxWidth = "400px"; // Ajuste visual básico
                         img.style.maxHeight = "300px"; // Ajuste visual básico
-                        articulo.appendChild(img); 
+                        articulo.appendChild(img);
                     }
 
                     const titulo = document.createElement("h2");
@@ -56,7 +73,11 @@ async function cargarBlogs() {
 
             } catch (error) {
                 console.error("Error:", error);
+                mostrarPopup("Error 500: Conexión rechazada. El servidor está apagado.");
             }
         }
 
-        cargarBlogs();
+cargarBlogs();
+
+
+    

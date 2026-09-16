@@ -28,7 +28,15 @@
         <p>Henry González 5090-23-19365</p>
     </footer>
 
-    <script src="index_script.js"></script> 
     
+    <script src="index_script.js"></script> 
+    <!-- Pop-up de error 500 -->
+    <div id="popup-error" class="popup-overlay">
+        <div class="popup-contenido">
+            <h3>Error 500</h3>
+            <p id="mensaje-error">No se pudo conectar con el servidor.</p>
+            <button onclick="cerrarPopup()">Cerrar</button>
+        </div>
+    </div>
 </body>
 </html>
