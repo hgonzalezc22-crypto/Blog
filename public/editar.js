@@ -35,7 +35,11 @@ document.getElementById('formEditar').addEventListener('submit', async (e) => {
         if (response.ok) {
             window.location.href = 'index.html';
         } else {
-            alert('Hubo un error al editar');
+            //Convertir la respuesta del servidor a objeto JSON
+            const data = await response.json();
+
+            //Muestra el mensaje de error personalizado que viene del backend (ej: error.message)
+            alert(data.mensaje || 'Hubo un error al agregar');
         }
     } catch (error) {
         console.error('Error:', error);

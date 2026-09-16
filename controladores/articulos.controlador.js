@@ -1,11 +1,21 @@
 // Importamos el modelo de datos
 const Articulo = require("../modelos/articulo.modelo");
+const { validarArticulo } = require("../helpers/validator");
 
 // Controlador para crear un nuevo artículo
 const crear = async (req, res) => {
-    try {
-        const { titulo, contenido, imgUrl} = req.body;
+     const { titulo, contenido, imgUrl} = req.body;
 
+    try {
+        validarArticulo({ titulo, contenido });
+    } catch (error) {
+        return res.status(400).json({
+            status: "error",
+            mensaje: error.message
+        });
+    }
+
+    try {
         // 2. Instanciar el objeto del artículo con la fecha autogenerada en el servidor
         const nuevoArticulo = new Articulo({
             titulo: titulo,
@@ -49,12 +59,22 @@ const obtenerBlogs = async (req, res) => {
 
 // Controlador para editar/actualizar un artículo por ID
 const editar = async (req, res) => {
+    const {titulo, contenido, imgUrl} = req.body;
+
+    try {
+        validarArticulo({ titulo, contenido });
+    } catch (error) {
+        return res.status(400).json({
+            status: "error",
+            mensaje: error.message
+        });
+    }
+
     try {
         // 1. Obtener el ID desde los parámetros de la URL (ej. /articulo/:id)
         const { id } = req.params;
 
         // 2. Extraer los campos enviados en el body
-        const {titulo, contenido, imgUrl} = req.body;
 
         // 3. Armar objeto con los datos a actualizar
         const datosActualizar = {};
@@ -126,6 +146,59 @@ const borrar = async (req, res) => {
         });
     }
 };
+
+/*
+const subir = async (req, res) => {
+    try {
+        // Configurar multer
+
+        // Recoger el fichero de imagen subido
+        if (!req.file && !req.files) {
+            return res.status(404).json({
+                status: "error",
+                mensaje: "Petición invalida"
+            });
+        }
+
+        // Nombre del archivo
+        let archivo = req.file.originalname;
+
+        // Extensión del archivo
+        let archivo_split = archivo.split(".");
+        let archivo_extension = archivo_split[1];
+
+        // Comprobar extensión correcta
+        if (archivo_extension !== "png" && archivo_extension !== "jpg" &&
+            archivo_extension !== "jpeg" && archivo_extension !== "gif") {
+            // Borrar archivo y dar respuesta
+            await new Promise((resolve, reject) => {
+                fs.unlink(req.file.path, (error) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve();
+                    }
+                });
+            });
+            return res.status(400).json({
+                status: "error",
+                mensaje: "Imagen inválida"
+            });
+        } else {
+            return res.status(200).json({
+                status: "success",
+                archivo_split,
+                files: req.file
+            });
+        }
+    } catch (error) {
+        return res.status(500).json({
+            status: "error",
+            mensaje: "Error en el servidor"
+        });
+    }
+};
+*/
 
 // Exportamos los controladores disponibles
 module.exports = {

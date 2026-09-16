@@ -23,7 +23,11 @@ document.getElementById('formAgregar').addEventListener('submit', async (e) => {
         if (response.ok) {
             window.location.href = 'index.html'; // Redirección al menú principal
         } else {
-            alert('Hubo un error al agregar');
+            //Convertir la respuesta del servidor a objeto JSON
+            const data = await response.json();
+
+            //Muestra el mensaje de error personalizado que viene del backend (ej: error.message)
+            alert(data.mensaje || 'Hubo un error al agregar');
         }
     } catch (error) {
         console.error('Error:', error);
